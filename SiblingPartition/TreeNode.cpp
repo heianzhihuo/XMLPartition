@@ -2,13 +2,23 @@
 
 TreeNode::TreeNode()
 {
-	weight = 0;
+	this->id = -1;
+	this->weight = 0;
 	this->next = NULL;
 	this->parent = NULL;
 }
 
-TreeNode::TreeNode(int weight)
+TreeNode::TreeNode(int w)
 {
+	this->id = -1;
+	this->weight = w;
+	this->next = NULL;
+	this->parent = NULL;
+}
+
+TreeNode::TreeNode(int id, int weight)
+{
+	this->id = id;
 	this->weight = weight;
 	this->next = NULL;
 	this->parent = NULL;
@@ -19,9 +29,9 @@ TreeNode::~TreeNode()
 	this->child.clear();
 }
 /*获得根节点权值*/
-int TreeNode::getRootNodeWeight()
+int TreeNode::getNodeWeight()
 {
-	return 0;
+	return weight;
 }
 /*获得树的权值*/
 int TreeNode::getTreeWeight()
@@ -39,17 +49,32 @@ void TreeNode::addChildNode(TreeNode * t)
 	this->child.push_back(*t);
 	t->parent = this;
 }
+/*获得子节点数*/
+int TreeNode::getChildNum()
+{
+	return child.size();
+}
+int TreeNode::getID()
+{
+	return id;
+}
+TreeNode TreeNode::getChild(int j)
+{
+	if (j > child.size())
+		return NULL;
+	return child[j-1];
+}
 /*树的后序遍历*/
 void TreeNode::postVisit()
 {
 	for (TreeNode c : child)
 		c.postVisit();
-	cout << weight << " ";
+	cout << id << ":" << weight << " ";
 }
 /*树的先序遍历*/
 void TreeNode::preVisit()
 {
-	cout << weight << " ";
+	cout << id << ":" << weight << " ";
 	for (TreeNode c : child)
 		c.preVisit();
 }

@@ -6,32 +6,15 @@ class Partition
 {
 public:
 	Partition();
-	Partition(TreeNode root);
 	~Partition();
-	void addInterval(TreeNode begin,TreeNode end);
 
 	int card;
 	int rootweight;
-	vector<pair<TreeNode, TreeNode>> intervals;
+	TreeNode begin, end;
 	
+	pair<int, int> next;
 };
 
-class FlatPartitionTable
-{
-public:
-	FlatPartitionTable();
-	~FlatPartitionTable();
+vector<vector<Partition>> FlatTreeDynamicForTreeWidth(TreeNode root,int K);
 
-
-private:
-
-};
-
-FlatPartitionTable::FlatPartitionTable()
-{
-}
-
-FlatPartitionTable::~FlatPartitionTable()
-{
-}
-
+void showPartition(vector<vector<Partition>> D,int rootweight);
