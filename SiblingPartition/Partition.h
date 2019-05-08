@@ -16,5 +16,7 @@ public:
 };
 
 vector<vector<Partition>> FlatTreeDynamicForTreeWidth(TreeNode root,int K);
+void showFDWPartition(vector<vector<Partition>> D,int rootweight);
 
-void showPartition(vector<vector<Partition>> D,int rootweight);
+vector<vector<vector<Partition>>> GreedyHeightDynamicWidth(TreeNode root, int K);
+void showGHDWPartition(vector<vector<vector<Partition>>> D, TreeNode root);

@@ -8,12 +8,13 @@ public:
 	TreeNode(int id, int weight);
 	~TreeNode();
 	int getNodeWeight();
+	void setNodeWeight(int w);
 	int getTreeWeight();
-	void addChildNode(TreeNode* t);
+	void addChildNode(TreeNode& t);
 	int getChildNum();
 	int getID();
 
-	TreeNode getChild(int j);
+	TreeNode& getChild(int j);
 
 	void postVisit();
 	void preVisit();

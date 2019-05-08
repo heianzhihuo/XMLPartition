@@ -33,6 +33,10 @@ int TreeNode::getNodeWeight()
 {
 	return weight;
 }
+void TreeNode::setNodeWeight(int w)
+{
+	this->weight = w;
+}
 /*获得树的权值*/
 int TreeNode::getTreeWeight()
 {
@@ -42,12 +46,12 @@ int TreeNode::getTreeWeight()
 	return w;
 }
 /*给根节点添加一个子节点*/
-void TreeNode::addChildNode(TreeNode * t)
+void TreeNode::addChildNode(TreeNode& t)
 {
 	if (this->child.size() != 0)
-		this->child[child.size() - 1].next = t;
-	this->child.push_back(*t);
-	t->parent = this;
+		this->child[child.size() - 1].next = &t;
+	this->child.push_back(t);
+	t.parent = this;
 }
 /*获得子节点数*/
 int TreeNode::getChildNum()
@@ -58,10 +62,8 @@ int TreeNode::getID()
 {
 	return id;
 }
-TreeNode TreeNode::getChild(int j)
+TreeNode& TreeNode::getChild(int j)
 {
-	if (j > child.size())
-		return NULL;
 	return child[j-1];
 }
 /*树的后序遍历*/

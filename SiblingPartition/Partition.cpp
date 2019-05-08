@@ -1,4 +1,5 @@
 #include "Partition.h"
+#include <stack>
 
 Partition::Partition()
 {
@@ -12,7 +13,11 @@ Partition::Partition()
 Partition::~Partition()
 {
 }
-
+/*FlatTree Dynamic programing for tree width
+ FDW的实现
+ 发现论文伪代码的一个问题
+ 
+ */
 vector<vector<Partition>> FlatTreeDynamicForTreeWidth(TreeNode root,int K)
 {
 	int wt = root.getNodeWeight(), n = root.getChildNum();
@@ -29,8 +34,11 @@ vector<vector<Partition>> FlatTreeDynamicForTreeWidth(TreeNode root,int K)
 		for (s = wt; s <= K; s++) {
 			int s1 = s + root.getChild(j).getNodeWeight();
 			Partition P;
-			if (s1 <= K)
+			if (s1 <= K) {
 				P = D[s1][j - 1];
+				P.rootweight+= root.getChild(j).getNodeWeight();
+			}
+				
 			else
 				P.card = INT_MAX;
 			int w = 0;
@@ -55,12 +63,13 @@ vector<vector<Partition>> FlatTreeDynamicForTreeWidth(TreeNode root,int K)
 	}
 	return D;
 }
-
-void showPartition(vector<vector<Partition>> D,int rootweight)
+/*展示FDW的结果*/
+void showFDWPartition(vector<vector<Partition>> D,int rootweight)
 {
 	int K = D.size() - 1, n = D[0].size() - 1;
 	int s = rootweight, j = n;
 	cout << "Card:" << D[s][j].card << endl;
+	cout << "RootWeight:" << D[s][j].rootweight << endl;
 	while (s > 0 || j > 0) {
 		TreeNode b = D[s][j].begin;
 		TreeNode e = D[s][j].end;
@@ -70,6 +79,47 @@ void showPartition(vector<vector<Partition>> D,int rootweight)
 		j = t.second;
 	}
 }
+/*GHDW算法的实现，Greedy-Height/Dynamic-Width*/
+vector<vector<vector<Partition>>> GHDW;
+vector<vector<vector<Partition>>> GreedyHeightDynamicWidth(TreeNode root, int K)
+{
+	vector<vector<vector<Partition>>> result;
+	stack<TreeNode *> Stack;
+	stack<bool> Stack1;
+	TreeNode* current;
+	Stack.push(&root);
+	Stack1.push(true);
+	while (!Stack.empty())
+	{
+		current = Stack.top();
+		if (current->getChildNum() != 0 && Stack1.top()) {
+			Stack1.pop();
+			Stack1.push(false);
+			for (int i = 0; i < current->getChildNum(); i++) {
+				Stack.push(&current->getChild(i + 1));
+				Stack1.push(true);
+			}
+		}
+		else {
+			vector<vector<Partition>> p = FlatTreeDynamicForTreeWidth(*current, K);
+			current->setNodeWeight(p[current->getNodeWeight()][current->getChildNum()].rootweight);
+			Stack.pop();
+			Stack1.pop();
+		}
+
+	}
+	return result;
+}
+TreeNode GreedyHeigtDW(TreeNode root, int K) {
+	
+	return TreeNode(1, 2);
+}
+/*展示GHDW的结果*/
+void showGHDWPartition(vector<vector<vector<Partition>>> D, TreeNode root)
+{
+}
+
+
 
 
 
