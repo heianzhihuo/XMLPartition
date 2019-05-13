@@ -7,19 +7,12 @@ public:
 	TreeNode(int w);
 	TreeNode(int id, int weight);
 	~TreeNode();
-	int getNodeWeight();
-	void setNodeWeight(int w);
-	int getTreeWeight();
-	void addChildNode(TreeNode& t);
-	int getChildNum();
-	int getID();
 
-	TreeNode& getChild(int j);
+	int getTreeWeight();
 
 	void postVisit();
 	void preVisit();
 
-private:
 	int id;
 	int weight;
 	vector<TreeNode> child;

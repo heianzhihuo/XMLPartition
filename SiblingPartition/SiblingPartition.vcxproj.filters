@@ -32,13 +32,13 @@
     <ClInclude Include="TreeNode.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="SiblingPartition.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Partition.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="XmlParser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SiblingPartition.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

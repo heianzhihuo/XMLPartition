@@ -1,0 +1,40 @@
+<root>
+<course_listing>
+  <note>#</note>
+  <course>216-088</course>
+  <title>NEW STUDENT ORIENTATION</title>
+  <credits>0</credits>
+  <level>U</level>
+  <restrictions>; ; REQUIRED OF ALL NEW STUDENTS. PREREQ: NONE</restrictions>
+   <section_listing>
+      <section_note></section_note>
+      <section>Se 001</section>
+      <days>W</days>
+      <hours>
+          <start>1:30pm</start>
+          <end></end>
+      </hours>
+      <bldg_and_rm>
+          <bldg>BUS</bldg>
+          <rm>S230</rm>
+      </bldg_and_rm>
+      <instructor>Gusavac</instructor>
+      <comments>9 WKS BEGINNING WEDNESDAY, 9/6/00 </comments>
+   </section_listing>
+   <section_listing>
+      <section_note></section_note>
+      <section>Se 002</section>
+      <days>F</days>
+      <hours>
+          <start>11:30am</start>
+          <end></end>
+      </hours>
+      <bldg_and_rm>
+          <bldg>BUS</bldg>
+          <rm>S171</rm>
+      </bldg_and_rm>
+      <instructor>Gusavac</instructor>
+      <comments>9 WKS BEGINNING FRIDAY, 9/8/00 </comments>
+   </section_listing>
+</course_listing>
+</root>
