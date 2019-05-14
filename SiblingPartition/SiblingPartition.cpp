@@ -11,6 +11,7 @@
 #include "XmlParser.h"
 
 
+
 int main()
 {
 	TreeNode c = TreeNode(3,1);
@@ -18,12 +19,14 @@ int main()
 	int id1[2] = {7,8};
 	for (int i = 0; i < 2; i++)
 		c.child.push_back(*(new TreeNode(id1[i], w1[i])));
-	TreeNode root = TreeNode(1,3);
-	root.child.push_back(*(new TreeNode(2,2)));
+	TreeNode root = TreeNode(1,5);
+	root.child.push_back(*(new TreeNode(2,1)));
 	root.child.push_back(c);
-	int w2[] = { 2,1,2,2,3};
-	int id2[] = { 4,5,6,9,10 };
-	for (int i = 0; i < 5; i++)
+	//int w2[] = { 2,1,2,2,3};
+	//int id2[] = { 4,5,6,9,10 };
+	int w2[] = { 1};
+	int id2[] = { 4};
+	for (int i = 0; i < 1; i++)
 		root.child.push_back(*(new TreeNode(id2[i], w2[i])));
 
 	root.postVisit();
@@ -36,13 +39,14 @@ int main()
 	//cout << P.card << endl;
 	//cout << P.rootweight << endl;
 	
-	vector<vector<Partition>> D = FlatTreeDynamicForTreeWidth(root, 5);
-	showFDWPartition(D,root.weight);
+	Partition* P = FlatTreeDynamicForTreeWidth(root, 5);
+	showFDWPartition(P);
+	//showFDWPartition(D,root.weight);
 
 	cout << endl;
 
-	vector<vector<vector<Partition>>> result = GreedyHeightDynamicWidth(root, 5);
-	showGHDWPartition(result,root);
+	vector<Partition*> result = GreedyHeightDynamicWidth(root, 5);
+	showGHDWPartition(result);
 	//cout << getGHDWPartitionNum(result, root)<<endl;
 
 	//cout << endl;
@@ -59,17 +63,17 @@ int main()
 	string strXml = buffer.str();
 	string temp(strXml);
 	
-	xmlParser.ParseXml(strXml);
+	//xmlParser.ParseXml(strXml);
 	cout << xmlParser.id << endl;
 
-	xmlParser.printXmlData(xmlParser.xmlDocument);
+	//xmlParser.printXmlData(xmlParser.xmlDocument);
 
 
 	//xmlParser.root.preVisit();
 
 	cout << "XM" << endl;
 
-	vector<vector<vector<Partition>>> rresu = GreedyHeightDynamicWidth(xmlParser.root, 8);
+	//vector<Partition*> rst = GreedyHeightDynamicWidth(xmlParser.root, 8);
 	//showGHDWPartition(rresu, xmlParser.root);
 	//cout << getGHDWPartitionNum(rresu, xmlParser.root) << endl;
 

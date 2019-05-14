@@ -16,12 +16,12 @@ bool XmlParser::ParseXml(string strXml)
 	return true;
 }
 
-int slot(string str) {
+int XmlParser::slot(string str) {
 	if (str.size() == 0)
 		return 1;//长度为0也至少占用一个slot
 	return (str.size()-1) * sizeof(char) / 8+1;//向上取整
 }
-int slot(int size) {
+int XmlParser::slot(int size) {
 	if (size == 0)
 		return 1;
 	return (size - 1) / 8 + 1;
@@ -75,17 +75,33 @@ int XmlParser::ParseOneItemNode(string strOneItemXml, TreeNode* pNode) {
 	if (pNode == nullptr) return 0;
 	TreeNode newNode(id, 0);
 	id++;
-	int i, j;
+	//获得项目名称
+	string s = strOneItemXml;
+	smatch m;
+	regex regexItem("<\\w+\\b");//长度至少为1的单词，后面为空格
+	if (regex_search(s, m, regexItem)) {
+		//string strItemName = m.str();
+		newNode.weight += slot(m.length()-1);
+	}
 	
 
 }
 
 int ParseXmlToTree(string strXml, TreeNode* root) {
 	if (root == nullptr) return 0;
-	int i, j, k, a, b, c, d;
-	
+	int i, j, k, a, b, c, d,n = strXml.size();
+	bool flag;
+	for (k = 0; k < n;) {
+		i = strXml.find_first_of('<',k);
+		j = strXml.find_first_of('>',k);
+		if (i >= j) {
+			cout << "Error!!!" << endl;
+			exit(0);
+		}
+		for (a = k; a < i; a++);
 
-
+			
+	}
 	return 1;
 }
 

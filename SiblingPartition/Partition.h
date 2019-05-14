@@ -12,12 +12,13 @@ public:
 	int rootweight;
 	TreeNode begin, end;
 	
-	pair<int, int> next;
+	Partition* next;//表示下一个划分的位置
+	//pair<int, int> next;
 };
 
-vector<vector<Partition>> FlatTreeDynamicForTreeWidth(TreeNode root,int K);
-void showFDWPartition(vector<vector<Partition>> D,int rootweight);
+Partition* FlatTreeDynamicForTreeWidth(TreeNode root,int K);
+void showFDWPartition(Partition* p);
 
-vector<vector<vector<Partition>>> GreedyHeightDynamicWidth(TreeNode root, int K);
-void showGHDWPartition(vector<vector<vector<Partition>>> D, TreeNode root);
-int getGHDWPartitionNum(vector<vector<vector<Partition>>> D, TreeNode root);
+vector<Partition*> GreedyHeightDynamicWidth(TreeNode root, int K);
+void showGHDWPartition(vector<Partition*> P);
+int getGHDWPartitionCard(vector<Partition*> P);

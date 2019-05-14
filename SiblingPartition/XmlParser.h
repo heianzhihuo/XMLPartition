@@ -43,6 +43,9 @@ public:
 	int ParseSubItemNode(string strOneItemXml, TreeNode* pNode);
 	int ParseOneAttribute(string strAttribute);
 
+	int slot(string str);
+	int slot(int size);
+
 	CDocument xmlDocument;
 	TreeNode root;
 	static int id;
