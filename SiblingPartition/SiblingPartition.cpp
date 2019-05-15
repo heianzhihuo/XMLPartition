@@ -40,16 +40,22 @@ int main()
 	//cout << P.rootweight << endl;
 	
 	Partition* P = FlatTreeDynamicForTreeWidth(root, 5);
-	showFDWPartition(P);
+	showPartition(P);
 	//showFDWPartition(D,root.weight);
 
 	cout << endl;
 
 	vector<Partition*> result = GreedyHeightDynamicWidth(root, 5);
-	showGHDWPartition(result);
+	showPartition(result);
 	//cout << getGHDWPartitionNum(result, root)<<endl;
 
 	//cout << endl;
+
+	vector<Partition*> reslt = DynamicHeightWidth(root, 5);
+
+	cout << endl << "DynamicHeightDynamicWidth" << endl;
+	showPartition(reslt);
+
 
 
 	XmlParser xmlParser;

@@ -1,5 +1,6 @@
 #include "Partition.h"
 #include <stack>
+#include <algorithm>
 
 Partition::Partition()
 {
@@ -39,6 +40,7 @@ Partition* FlatTreeDynamicForTreeWidth(TreeNode root,int K)
 			if (s1 <= K) {
 				P = D[s1][j - 1];
 				P.rootweight+= root.child[j - 1].weight;
+				cout << s1 << "," << P.rootweight << endl;
 			}	
 			else
 				P.card = INT_MAX;
@@ -70,7 +72,7 @@ Partition* FlatTreeDynamicForTreeWidth(TreeNode root,int K)
 	//return D;
 }
 /*展示FDW的结果*/
-void showFDWPartition(Partition* p)
+void showPartition(Partition* p)
 {
 	cout << "Partition Card:" << p->card << endl;
 	cout << "RootWeight:" << p->rootweight << endl;
@@ -124,7 +126,7 @@ int getGHDWPartitionCard(vector<Partition*> P) {
 	return card+1;
 }
 /*展示GHDW的结果*/
-void showGHDWPartition(vector<Partition*> P)
+void showPartition(vector<Partition*> P)
 {
 	int card = 0;
 	for (Partition* p : P) {
@@ -136,6 +138,10 @@ void showGHDWPartition(vector<Partition*> P)
 		cout << endl;
 	}
 	cout << "Partition Card : "<< card + 1 << endl;
+}
+
+int compare(Partition p1, Partition p2) {
+	return p1.dw - p2.dw;
 }
 
 vector<Partition*> DynamicHeightWidth(TreeNode root, int K) {
@@ -157,11 +163,67 @@ vector<Partition*> DynamicHeightWidth(TreeNode root, int K) {
 			}
 		}
 		else {
-
-			Partition* p = FlatTreeDynamicForTreeWidth(*current, K);
-			
-			current->weight = p->rootweight;
-			result.push_back(p);
+			int wt = current->weight, n = current->child.size();
+			int wtm = K - wt + 1;
+			vector<vector<Partition>>D(K + 1, vector<Partition>(n + 1));
+			for (int s = wt; s <= K; s++) {
+				D[s][0].begin = *current;
+				D[s][0].end = *current;
+				D[s][0].card = 1;
+				D[s][0].rootweight = s;
+				D[s][0].next = NULL;
+				D[s][0].dw = 0;
+			}
+			for (int j = 1; j < n; j++) {
+				for (int s = wt; s <= K; s++) {
+					int s1 = s + result[current->child[j - 1].id]->rootweight;
+					Partition P;
+					if (s1 <= K) {
+						P = D[s1][j - 1];
+						P.rootweight += current->child[j - 1].weight;
+					}
+					else {
+						P.card = INT_MAX;
+						P.dw = 0;
+					}
+						
+					int w = 0, m = 0, dw = 0;
+					while (m < j && m < K && w - dw < K) {
+						w += current->child[j - m - 1].weight;
+						dw += result[current->child[j - m - 1].id]->dw;
+						if (w - dw <= K) {
+							int crd = D[s][j - m - 1].card + 1;
+							int rw = D[s][j - m - 1].rootweight;
+							vector<Partition> C;
+							for (int a = j - m; a <= j; a++)
+								C.push_back(current->child[a - 1]);
+							sort(C.begin(), C.end(), compare);
+							int w1 = w;
+							int in = 0;
+							while (w1>K){
+								TreeNode u;
+								if (C[in].card == 1)
+									u = C[in].begin;
+								else
+									u = *(C[in].begin.parent);
+								w1 -= result[u.id]->dw;
+							}
+							if (crd < P.card || (crd == P.card && rw < P.rootweight)) {
+								P.begin = current->child[j - m - 1];
+								P.end = current->child[j - 1];
+								P.card = crd;
+								P.rootweight = rw;
+								P.next = &D[s][j - m - 1];
+							}
+						}
+						m++;
+					}
+					D[s][j] = P;
+				}
+			}
+			current->weight = D[wt][n].rootweight;
+			current->id = result.size();
+			result.push_back(&D[wt][n]);
 			Stack.pop();
 			Stack1.pop();
 		}

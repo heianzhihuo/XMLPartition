@@ -10,6 +10,9 @@ public:
 
 	int card;
 	int rootweight;
+
+	int dw = 0;
+
 	TreeNode begin, end;
 	
 	Partition* next;//表示下一个划分的位置
@@ -17,8 +20,11 @@ public:
 };
 
 Partition* FlatTreeDynamicForTreeWidth(TreeNode root,int K);
-void showFDWPartition(Partition* p);
+void showPartition(Partition* p);
 
 vector<Partition*> GreedyHeightDynamicWidth(TreeNode root, int K);
-void showGHDWPartition(vector<Partition*> P);
+void showPartition(vector<Partition*> P);
 int getGHDWPartitionCard(vector<Partition*> P);
+
+int compare(Partition p1, Partition p2);
+vector<Partition*> DynamicHeightWidth(TreeNode root, int K);
