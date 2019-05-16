@@ -14,6 +14,39 @@
 
 int main()
 {
+	/*clock_t start, end;
+	TreeNode ttt(1, 10);
+	
+	start = clock();
+	TreeNode sss = ttt;
+	end = clock();
+	cout << end - start << endl;
+
+	for (int i = 0; i < 100; i++)
+		ttt.child.push_back(TreeNode(i, i + 1));
+
+	start = clock();
+	TreeNode ssssss = ttt;
+	end = clock();
+	cout << end - start << endl;
+
+	for (int i = 0; i < 10000; i++)
+		ttt.child.push_back(TreeNode(i, i + 1));
+
+	start = clock();
+	TreeNode sssss = ttt;
+	end = clock();
+	cout << end - start << endl;
+
+	for (int i = 0; i < 1000000; i++)
+		ttt.child.push_back(TreeNode(i, i + 1));
+	
+	start = clock();
+	TreeNode ssss = ttt;
+	end = clock();
+	cout << end - start << endl;*/
+
+
 	TreeNode c = TreeNode(3,1);
 	int w1[2] = { 2,2 };
 	int id1[2] = {7,8};

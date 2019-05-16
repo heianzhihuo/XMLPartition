@@ -20,4 +20,4 @@ public:
 	TreeNode* next;
 };
 
-typedef TreeNode Tree;
+typedef TreeNode* Tree;

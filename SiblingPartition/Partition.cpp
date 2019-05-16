@@ -20,6 +20,18 @@ Partition::~Partition()
  发现论文伪代码的一个问题
  
  */
+
+Partition* FlatTreeDynamicForTreeWidth(TreeNode* root, int K) {
+	int wt = root->weight, n = root->child.size();
+	int m = K - wt + 1;
+	vector<vector<Partition*>> D(m, vector<Partition*>(n + 1));
+	for (int s = 0; s < m; s++) {
+		D[s][0] = new Partition;
+		//D[s][0]->begin = root;
+	}
+}
+
+
 Partition* FlatTreeDynamicForTreeWidth(TreeNode root,int K)
 {
 	int wt = root.weight, n = root.child.size();
@@ -40,7 +52,6 @@ Partition* FlatTreeDynamicForTreeWidth(TreeNode root,int K)
 			if (s1 <= K) {
 				P = D[s1][j - 1];
 				P.rootweight+= root.child[j - 1].weight;
-				cout << s1 << "," << P.rootweight << endl;
 			}	
 			else
 				P.card = INT_MAX;
@@ -196,7 +207,7 @@ vector<Partition*> DynamicHeightWidth(TreeNode root, int K) {
 							int rw = D[s][j - m - 1].rootweight;
 							vector<Partition> C;
 							for (int a = j - m; a <= j; a++)
-								C.push_back(current->child[a - 1]);
+								C.push_back(*result[current->child[a - 1].id]);
 							sort(C.begin(), C.end(), compare);
 							int w1 = w;
 							int in = 0;
