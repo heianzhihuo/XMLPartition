@@ -24,12 +24,18 @@
     <ClCompile Include="Partition.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="XmlParser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TreeNode.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Partition.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="XmlParser.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

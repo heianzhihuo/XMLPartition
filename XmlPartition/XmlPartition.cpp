@@ -2,9 +2,12 @@
 //
 
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <ctime>
 #include "TreeNode.h"
 #include "Partition.h"
+#include "XmlParser.h"
 
 using namespace std;
 int main()
@@ -41,4 +44,48 @@ int main()
 	cout << endl;
 
     cout << "Hello World!\n"; 
+	string test = "Hello World\n";
+	cout << test.find_first_of(" ", 0, 4) << endl;
+
+
+	XmlParser xmlParser;
+	//ifstream infile("uwm.xml");
+	//ifstream infile("xtest.xml");
+	ifstream infile("SigmodRecord.xml");
+	
+	if (!infile.is_open())
+	{
+		cout << "文件未成功打开!!!" << endl;
+	}
+	stringstream buffer;
+	buffer << infile.rdbuf();
+	string strXml = buffer.str();
+	string temp(strXml);
+
+	TreeNode* r = xmlParser.ParseToTree(temp);
+	cout << xmlParser.id << endl;
+	clock_t start, end;
+	//r->preVisit();
+	start = clock();
+	vector<Partition*> PP = GreedyHeightDynamicWidth(r, 352);
+	end = clock();
+	cout << (end - start) / CLOCKS_PER_SEC << "s" << endl;
+	
+	//showPartition(PP);
+	cout << getPartitionCard(PP)<<endl;
+
+	start = clock();
+	DynamicHeightWidth(r, 352);
+	end = clock();
+	cout << (end - start) / CLOCKS_PER_SEC << "s" << endl;
+	cout << getPartitionCard(r) << endl;
+
+	/*cout << endl;
+	DynamicHeightWidth(r, 8);
+	int crd = showPartition(r);
+	cout << "Partition Card:" << crd << endl;
+*/
+	
+	//r->preVisit();
+
 }

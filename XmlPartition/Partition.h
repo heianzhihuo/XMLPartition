@@ -20,6 +20,8 @@ void showPartition(Partition* p);
 vector<Partition*> GreedyHeightDynamicWidth(TreeNode* root, int K);
 void showPartition(vector<Partition*> P);
 
+int getPartitionCard(vector<Partition*> P);
+int getPartitionCard(TreeNode *root);
 int showPartition(TreeNode *root);
 
 bool compare(TreeNode* p1,TreeNode *p2);

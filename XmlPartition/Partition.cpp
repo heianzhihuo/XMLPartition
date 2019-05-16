@@ -143,6 +143,26 @@ void showPartition(vector<Partition*> P)
 	cout << "Partition Card : " << card + 1 << endl;
 }
 
+int getPartitionCard(TreeNode *root) {
+	int card = 0;
+	for (auto c : root->child)
+		card += getPartitionCard(c);
+	Partition *p;
+	if (root->isNopt && root->nopt != nullptr) p = root->nopt;
+	else p = root->par;
+	card += p->card;
+	return card - 1;
+}
+
+int getPartitionCard(vector<Partition*> P)
+{
+	int card = 0;
+	for (Partition* p : P) {
+		card += p->card - 1;
+	}
+	return card+1;
+}
+
 int showPartition(TreeNode * root)
 {
 	int card = 0;
