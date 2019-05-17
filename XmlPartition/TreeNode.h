@@ -28,8 +28,7 @@ public:
 	class Partition* par = nullptr;//表示这个子树的optimal partition
 	class Partition* nopt = nullptr;//表示这个子树的nearly optimal partition
 	int dw = 0;//ΔW
-	bool isNopt = false;//表示在最优解中，这个子树采用了optimal 还是 nearly optimal
-
+	bool useNopt = false;
 };
 
 typedef TreeNode* Tree;

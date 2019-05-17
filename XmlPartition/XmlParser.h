@@ -42,6 +42,9 @@ public:
 	int ParseOneAttribute(string strAttribute);
 
 	TreeNode* ParseToTree(string strXml);
+
+	TreeNode* ParseToTree2(string strXml);
+
 	int ParseAttributes(string strXml);
 
 	int ParseToTree(string strXml, TreeNode* root);

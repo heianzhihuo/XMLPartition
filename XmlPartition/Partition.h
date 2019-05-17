@@ -12,6 +12,8 @@ public:
 	TreeNode*begin = nullptr,*end = nullptr;
 
 	Partition* next = nullptr;//表示下一个划分的位置
+
+	vector<TreeNode*> * nearlyopt = nullptr;//用于DHW
 };
 
 Partition* FlatTreeDynamicForTreeWidth(TreeNode* root, int K);

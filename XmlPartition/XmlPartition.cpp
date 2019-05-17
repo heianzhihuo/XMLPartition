@@ -52,7 +52,7 @@ int main()
 	//ifstream infile("uwm.xml");
 	//ifstream infile("xtest.xml");
 	ifstream infile("SigmodRecord.xml");
-	
+	//ifstream infile("xmltest.xml");
 	if (!infile.is_open())
 	{
 		cout << "文件未成功打开!!!" << endl;
@@ -62,8 +62,13 @@ int main()
 	string strXml = buffer.str();
 	string temp(strXml);
 
-	TreeNode* r = xmlParser.ParseToTree(temp);
+	TreeNode* r = xmlParser.ParseToTree2(temp);
 	cout << xmlParser.id << endl;
+	//r->preVisit();
+	//cout << endl;
+	//r->postVisit();
+	//cout << endl;
+	//cout << r->child.size() << endl;
 	clock_t start, end;
 	//r->preVisit();
 	start = clock();
@@ -72,13 +77,16 @@ int main()
 	cout << (end - start) / CLOCKS_PER_SEC << "s" << endl;
 	
 	//showPartition(PP);
-	cout << getPartitionCard(PP)<<endl;
+	cout << "Partition Card:" << getPartitionCard(PP)<<endl;
 
+	cout << endl;
 	start = clock();
 	DynamicHeightWidth(r, 352);
 	end = clock();
 	cout << (end - start) / CLOCKS_PER_SEC << "s" << endl;
-	cout << getPartitionCard(r) << endl;
+	//showPartition(r);
+	cout << endl;
+	cout << "Partition Card:"<<getPartitionCard(r)+1 << endl;
 
 	/*cout << endl;
 	DynamicHeightWidth(r, 8);

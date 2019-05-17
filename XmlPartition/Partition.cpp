@@ -147,10 +147,10 @@ int getPartitionCard(TreeNode *root) {
 	int card = 0;
 	for (auto c : root->child)
 		card += getPartitionCard(c);
-	Partition *p;
-	if (root->isNopt && root->nopt != nullptr) p = root->nopt;
-	else p = root->par;
+	Partition *p = root->par;
 	card += p->card;
+	if (p->nearlyopt != nullptr)
+		card -= p->nearlyopt->size();
 	return card - 1;
 }
 
@@ -165,20 +165,24 @@ int getPartitionCard(vector<Partition*> P)
 
 int showPartition(TreeNode * root)
 {
-	int card = 0;
-	for (auto c : root->child)
-		card+= showPartition(c);
+	//int card = 0;
 	Partition *p;
-	if (root->isNopt && root->nopt!=nullptr) p = root->nopt;
+	if (root->useNopt && root->nopt != nullptr) p = root->nopt;
 	else p = root->par;
-	card += p->card;
-	cout << p->card << ":";
-	while (p!=nullptr){
+	cout << endl;
+	while (p != nullptr) {
 		cout << "(" << p->begin->id << "," << p->end->id << ")";
+		if (p->nearlyopt != nullptr)
+			for (auto c : *p->nearlyopt)
+				c->useNopt = true;
 		p = p->next;
 	}
-	cout << endl;
-	return card-1;
+	for (auto c : root->child)
+		showPartition(c);
+
+	//Partition *p = root->par;
+	//if (root->parent == nullptr || root->nopt!=nullptr) p = root->nopt;
+	return 0;
 }
 
 bool compare(TreeNode * p1, TreeNode * p2)
@@ -238,11 +242,12 @@ void DynamicHeightWidth(TreeNode* root, int K)
 								C.push_back(current->child[_ - 1]);
 							sort(C.begin(), C.end(), compare);//降序排列
 							int w1 = w;
+							vector<TreeNode*>* N = new vector<TreeNode*>;
 							for (TreeNode* u : C) {
 								if (w1 <= K)
 									break;
 								w1 -= u->dw;//表示子节点u采用nearly optimal
-								u->isNopt = true;
+								N->push_back(u);
 								crd++;
 							}
 							if (crd < P->card || (crd == P->card && rw < P->rootweight)) {
@@ -251,6 +256,7 @@ void DynamicHeightWidth(TreeNode* root, int K)
 								P->card = crd;
 								P->rootweight = rw;
 								P->next = D[s][j - m - 1];
+								P->nearlyopt = N;
 							}
 						}
 						m++;

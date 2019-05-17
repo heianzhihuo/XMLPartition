@@ -1,0 +1,48 @@
+<SigmodRecord>
+  <issue>
+ <volume>11</volume>
+ <number>1</number>
+    <articles>
+     <article>
+ <title>Annotated Bibliography on Data Design.</title>
+ <initPage>45</initPage>
+ <endPage>77</endPage>
+          <authors>
+ <author position="00">Anthony I. Wasserman</author>
+ <author position="01">Karen Botnich</author>
+          </authors>
+     </article>
+
+     <article>
+ <title>Architecture of Future Data Base Systems.</title>
+ <initPage>30</initPage>
+ <endPage>44</endPage>
+          <authors>
+ <author position="00">Lawrence A. Rowe</author>
+ <author position="01">Michael Stonebraker</author>
+          </authors>
+     </article>
+
+     <article>
+ <title>Database Directions III Workshop Review.</title>
+ <initPage>8</initPage>
+ <endPage>8</endPage>
+          <authors>
+ <author position="00">Tom Cook</author>
+          </authors>
+     </article>
+
+     <article>
+ <title>Errors in 'Process Synchronization in Database Systems'.</title>
+ <initPage>9</initPage>
+ <endPage>29</endPage>
+          <authors>
+ <author position="00">Philip A. Bernstein</author>
+ <author position="01">Marco A. Casanova</author>
+ <author position="02">Nathan Goodman</author>
+          </authors>
+     </article>
+
+    </articles>
+  </issue>
+</SigmodRecord>
